@@ -20,9 +20,10 @@ function getSkuFromProductItem(item) {
 }
 
 function cartItemClickListener(event) {
-  // coloque seu código aqui
+  const ElementRemovedFather = (event.target.parentNode);
+  ElementRemovedFather.removeChild(event.target);
 }
-
+ // rq 3 ^ 
 function createCartItemElement({ id: sku, title: name, price: salePrice }) {
   const li = document.createElement('li');
   li.className = 'cart__item';
@@ -38,6 +39,8 @@ const toCart = async (addCart) => {
   const obj = createCartItemElement(resuls);
   cartElment.appendChild(obj);
  };
+
+ // rq 2 ^
 
 function createProductItemElement({ id: sku, title: name, thumbnail: image }) {
   const section = document.createElement('section');
@@ -63,5 +66,5 @@ results.forEach((product) => {
 
 console.log(results);
 };
-
+// rq 1 ^ 
 window.onload = () => { implementLi(); };

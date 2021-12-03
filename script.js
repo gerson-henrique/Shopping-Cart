@@ -67,4 +67,12 @@ results.forEach((product) => {
 console.log(results);
 };
 // rq 1 ^ 
+
+const erase = () => {
+document.querySelector('.cart__items').innerHTML = '';
+};
+const btnErase = document.getElementsByClassName('empty-cart')[0];
+btnErase.addEventListener('click', erase);
+
+// rq 6
 window.onload = () => { implementLi(); };

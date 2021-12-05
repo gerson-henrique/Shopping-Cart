@@ -58,13 +58,30 @@ function createProductItemElement({ id: sku, title: name, thumbnail: image }) {
   return section;
 }
 
+const load = () => {
+const element = document.createElement('div');
+element.innerText = 'carregando...';
+element.className = 'loading';
+const body = document.querySelector('body');
+body.appendChild(element);
+};
+
+const unload = () => {
+  const check = document.querySelector('.loading');
+  check.remove();
+};
+
+// rq 7 ^ 
+
 const implementLi = async () => {
+  load();
 const { results } = await fetchProducts('computador');
 const listaElment = document.querySelector('.items');
 results.forEach((product) => {
   const obj = createProductItemElement(product);
   listaElment.appendChild(obj);
 });
+  unload();
 };
 // rq 1 ^ 
 
@@ -75,11 +92,13 @@ saveCartItems(cartElment.childNodes);
 const btnErase = document.getElementsByClassName('empty-cart')[0];
 btnErase.addEventListener('click', erase);
 
-// rq 6
+// rq 6 ^
 
 const addExcludes = () => {
   const allChild = cartElment.childNodes;
   allChild.forEach((a) => a.addEventListener('click', cartItemClickListener));
 };
+
+// rq 4 ^ 
 
 window.onload = () => { implementLi(); getSavedCartItems(); addExcludes(); };

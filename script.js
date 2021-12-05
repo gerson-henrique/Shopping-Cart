@@ -1,6 +1,7 @@
 // const { fetchProducts } = require("./helpers/fetchProducts");
 // const { fetchItem } = require("./helpers/fetchItem");
 
+const cartElment = document.querySelector('.cart__items');
 function createProductImageElement(imageSource) {
   const img = document.createElement('img');
   img.className = 'item__image';
@@ -22,6 +23,7 @@ function getSkuFromProductItem(item) {
 function cartItemClickListener(event) {
   const ElementRemovedFather = (event.target.parentNode);
   ElementRemovedFather.removeChild(event.target);
+  saveCartItems(cartElment.childNodes);
 }
  // rq 3 ^ 
 function createCartItemElement({ id: sku, title: name, price: salePrice }) {
@@ -32,12 +34,12 @@ function createCartItemElement({ id: sku, title: name, price: salePrice }) {
   return li;
 }
 
-const cartElment = document.querySelector('.cart__items');
 const toCart = async (addCart) => {
   const sku = getSkuFromProductItem(addCart.target.parentNode);
   const resuls = await fetchItem(sku);
   const obj = createCartItemElement(resuls);
   cartElment.appendChild(obj);
+    saveCartItems(cartElment.innerHTML);
  };
 
  // rq 2 ^
@@ -63,16 +65,21 @@ results.forEach((product) => {
   const obj = createProductItemElement(product);
   listaElment.appendChild(obj);
 });
-
-console.log(results);
 };
 // rq 1 ^ 
 
 const erase = () => {
 document.querySelector('.cart__items').innerHTML = '';
+saveCartItems(cartElment.childNodes);
 };
 const btnErase = document.getElementsByClassName('empty-cart')[0];
 btnErase.addEventListener('click', erase);
 
 // rq 6
-window.onload = () => { implementLi(); };
+
+const addExcludes = () => {
+  const allChild = cartElment.childNodes;
+  allChild.forEach((a) => a.addEventListener('click', cartItemClickListener));
+};
+
+window.onload = () => { implementLi(); getSavedCartItems(); addExcludes(); };

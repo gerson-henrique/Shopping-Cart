@@ -4,6 +4,15 @@ const saveCartItems = require('../helpers/saveCartItems');
 localStorageSimulator('setItem');
 
 describe('4 - Teste a função saveCartItems', () => {
-  // implemente seus testes aqui
-  fail('Teste vazio');
+
+  const test = '<ol><li>Item</li></ol>'
+
+  it('se a função usa o metodo localStorage.setItem', () => {
+    expect(saveCartItems(test)).toEqual(localStorage.setItem())
+   } )
+ 
+   it('se a função usa o metodo e usa a key especifica',async () => {
+    expect(saveCartItems(test)).toEqual(localStorage.setItem('cartItems', test))
+   } )
+
 });

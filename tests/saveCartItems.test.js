@@ -11,8 +11,10 @@ describe('4 - Teste a função saveCartItems', () => {
     expect(saveCartItems(test)).toEqual(localStorage.setItem())
    } )
  
-   it('se a função usa o metodo e usa a key especifica',async () => {
+   it('se a função usa o metodo e usa a key', () => {
     expect(saveCartItems(test)).toEqual(localStorage.setItem('cartItems', test))
    } )
+
+ 
 
 });

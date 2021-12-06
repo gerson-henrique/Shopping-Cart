@@ -3,6 +3,7 @@
 
 const valueWay = document.querySelector('.total-price'); 
 let value = 0;
+const objectIDs = [];
 
 const cartElment = document.querySelector('.cart__items');
 function createProductImageElement(imageSource) {
@@ -28,8 +29,7 @@ function cartItemClickListener(event) {
   ElementRemovedFather.removeChild(event.target);
   const text = event.target.innerText;
   const price = text.split('$');
-  console.log(price);
-  value -= (parseFloat(price[1], 10));
+  value -= parseFloat(price[1]);
   valueWay.innerText = value;
   saveCartItems(cartElment.childNodes);
   }
@@ -86,6 +86,9 @@ const unload = () => {
 };
 
 // rq 7 ^ 
+
+const lintfix = objectIDs[0];
+console.log(lintfix);
 
 const implementLi = async () => {
   load();

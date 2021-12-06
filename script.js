@@ -3,7 +3,6 @@
 
 const valueWay = document.querySelector('.total-price'); 
 let value = 0;
-const objectIDs = [];
 
 const cartElment = document.querySelector('.cart__items');
 function createProductImageElement(imageSource) {

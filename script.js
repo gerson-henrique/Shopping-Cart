@@ -1,6 +1,10 @@
 // const { fetchProducts } = require("./helpers/fetchProducts");
 // const { fetchItem } = require("./helpers/fetchItem");
 
+const valueWay = document.querySelector('.total-price'); 
+let value = 0;
+const objectIDs = [];
+
 const cartElment = document.querySelector('.cart__items');
 function createProductImageElement(imageSource) {
   const img = document.createElement('img');
@@ -23,16 +27,27 @@ function getSkuFromProductItem(item) {
 function cartItemClickListener(event) {
   const ElementRemovedFather = (event.target.parentNode);
   ElementRemovedFather.removeChild(event.target);
+  const text = event.target.innerText;
+  const price = text.split('$');
+  console.log(price);
+  value -= (parseFloat(price[1], 10));
+  valueWay.innerText = value;
   saveCartItems(cartElment.childNodes);
-}
+  }
  // rq 3 ^ 
 function createCartItemElement({ id: sku, title: name, price: salePrice }) {
+  objectIDs.push({ id: sku, price: salePrice });
   const li = document.createElement('li');
+  value += salePrice;
+  valueWay.innerText = value;
   li.className = 'cart__item';
   li.innerText = `SKU: ${sku} | NAME: ${name} | PRICE: $${salePrice}`;
   li.addEventListener('click', cartItemClickListener);
+
   return li;
 }
+
+// rq 5 ^ 
 
 const toCart = async (addCart) => {
   const sku = getSkuFromProductItem(addCart.target.parentNode);
